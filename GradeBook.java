@@ -2,12 +2,12 @@
 
 public class GradeBook {
    private String courseName; // name of course this GradeBook represents
-   private int[] grades; // array of student grades
+   private Student[] students; // array of students
    
    // constructor
-   public GradeBook(String courseName, int[] grades) {
+   public GradeBook(String courseName, Student[] students) {
       this.courseName = courseName; 
-      this.grades = grades; 
+      this.students = students; 
    } 
 
    // method to set the course name
@@ -38,28 +38,28 @@ public class GradeBook {
 
    // find minimum grade
    public int getMinimum() {
-      int lowGrade = grades[0]; // assume grades[0] is smallest
+      int lowGrade = students[0].getGrade(); // assume grades[0] is smallest
 
       // loop through grades array                             
-      for (int grade : grades) {                               
+      for (Student student : students) {                               
          // if grade lower than lowGrade, assign it to lowGrade
-         if (grade < lowGrade) {                               
-            lowGrade = grade; // new lowest grade              
-         }                                                     
-      }                                                        
+         if (student.getGrade() < lowGrade) {                               
+            lowGrade = student.getGrade(); // new lowest grade              
+         }                      
+      }                                                     
 
       return lowGrade;
    } 
 
    // find maximum grade
    public int getMaximum() {
-      int highGrade = grades[0]; // assume grades[0] is largest
+      int highGrade = students[0].getGrade(); // assume grades[0] is largest
 
       // loop through grades array                                 
-      for (int grade : grades) {                                  
+      for (Student student : students) {                                  
          // if grade greater than highGrade, assign it to highGrade
-         if (grade > highGrade) {
-            highGrade = grade; // new highest grade
+         if (student.getGrade() > highGrade) {
+            highGrade = student.getGrade(); // new highest grade
          } 
       } 
 
@@ -71,12 +71,12 @@ public class GradeBook {
       int total = 0;
  
       // sum grades for one student
-      for (int grade : grades) {   
-         total += grade;           
+      for (Student student : students) {   
+         total += student.getGrade();           
       }                            
 
       // return average of grades
-      return (double) total / grades.length;
+      return (double) total / students.length;
    } 
 
    // output bar chart displaying grade distribution
@@ -87,8 +87,8 @@ public class GradeBook {
       int[] frequency = new int[11];
       
       // for each grade, increment the appropriate frequency
-      for (int grade : grades) {                            
-         ++frequency[grade / 10];                           
+      for (Student student : students) {                            
+         ++frequency[student.getGrade() / 10];                           
       }                                                     
 
       // for each grade frequency, print bar in chart
@@ -114,10 +114,10 @@ public class GradeBook {
    public void outputGrades() {
       System.out.printf("The grades are:%n%n");
 
-      // output each student's grade                             
-      for (int student = 0; student < grades.length; student++) {
-         System.out.printf("Student %2d: %3d%n",                 
-            student + 1, grades[student]);                       
+      // output each student's name & grade                             
+      for (int student = 0; student < students.length; student++) {
+         System.out.printf("Student %2d: name = %s, grade = %3d%n",                 
+            student + 1, students[student].getName(), students[student].getGrade());                       
       }                                                          
    } 
 } 
